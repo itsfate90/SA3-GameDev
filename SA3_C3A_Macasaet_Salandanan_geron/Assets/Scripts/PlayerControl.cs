@@ -7,23 +7,25 @@ public class PlayerControl : MonoBehaviour
 	public GameObject Bulletpos1;
 	public GameObject Bulletpos2;
 	public float speed=5f;
+	public float timer = 5f;
 
 	// Use this for initialization
 	void Start () 
 	{
 		
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
-        if (Input.GetKeyDown("space"))
-        {
+		timer -= Time.deltaTime * 25;
+		while(timer<=0){
 			GameObject bullet01 = (GameObject)Instantiate(Playerbulletobject);
 			bullet01.transform.position = Bulletpos1.transform.position;
 
 			GameObject bullet02 = (GameObject)Instantiate(Playerbulletobject);
 			bullet02.transform.position = Bulletpos2.transform.position;
+			timer = 5f;
 		}
 
 		float x = Input.GetAxisRaw ("Horizontal");//the value will be -1, 0 or 1 (for left, no input, and right)
