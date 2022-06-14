@@ -35,6 +35,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		timer -= Time.deltaTime * 25;
 		while(timer<=0){
+			GetComponent<AudioSource>().Play();
 			GameObject bullet01 = (GameObject)Instantiate(Playerbulletobject);
 			bullet01.transform.position = Bulletpos1.transform.position;
 

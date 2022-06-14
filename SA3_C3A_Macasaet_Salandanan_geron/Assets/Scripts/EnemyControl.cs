@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    GameObject scoreUITextGO;
     public GameObject ExplosionGO;
     float speed;
 
@@ -13,6 +14,7 @@ public class EnemyControl : MonoBehaviour
     void Start()
     {
         speed = 2f;
+        scoreUITextGO = GameObject.FindGameObjectWithTag("ScoreTextTag");
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class EnemyControl : MonoBehaviour
         if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag"))
         {
             PlayExplosion();
+            scoreUITextGO.GetComponent<GameScore>().Score += 10000;
             Destroy(gameObject);
         }
     }

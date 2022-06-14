@@ -8,6 +8,7 @@ TagManager:
   - EnemyShipTag
   - PlayerBulletTag
   - EnemyBulletTag
+  - ScoreTextTag
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 793178873
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
