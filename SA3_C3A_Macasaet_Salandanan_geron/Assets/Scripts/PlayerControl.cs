@@ -1,13 +1,28 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour 
 {
+	public GameObject GameManagerGO;
 	public GameObject Playerbulletobject;
 	public GameObject Bulletpos1;
 	public GameObject Bulletpos2;
+	public GameObject ExplosionGO;
+	public Text LivesUIText;
+	const int MaxLives = 3;
+	int lives;
 	public float speed=5f;
 	public float timer = 5f;
+
+	public void Init()
+    {
+		lives = MaxLives;
+		LivesUIText.text = lives.ToString();
+
+		gameObject.SetActive(true);
+
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -62,5 +77,28 @@ public class PlayerControl : MonoBehaviour
 
 		//Update the player's position
 		transform.position = pos;
+
+		
+        }
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+			{
+			PlayExplosion();
+			lives--;
+			LivesUIText.text = lives.ToString();
+            if (lives == 0)
+            {
+				GameManagerGO.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+				gameObject.SetActive(false);
+			}
+			
+		} 
 	}
+	void PlayExplosion()
+    {
+		GameObject explosion = (GameObject)Instantiate(ExplosionGO);
+		 
+		explosion.transform.position = transform.position;
+    }
 }
